@@ -7,11 +7,11 @@
 }
 
 #root {
-    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow: scroll;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
 }
 
 p {
@@ -20,19 +20,24 @@ p {
 }
 
 .morning {
-    background: linear-gradient(45deg, #A9D2F9 0%, #FFE7AA 100%);
+    background: url('./images/day.png'), linear-gradient(45deg, #A9D2F9 0%, #FFE7AA 100%);
+    background-repeat: repeat-x;
 }
 
 .daytime {
-    background: linear-gradient(45deg, #76A9F4 0%, #E9F2FF 100%);
+    background: url('./images/day.png'), linear-gradient(45deg, #76A9F4 0%, #E9F2FF 100%);
+    background-repeat: repeat-x;
+    background-position-y: 50%;
 }
 
 .evening {
-    background: linear-gradient(45deg, #6659C9 0%, #C57979 70%, #FFE17C 100%);
+    background: url('./images/evening.png'), linear-gradient(45deg, #6659C9 0%, #C57979 70%, #FFE17C 100%);
+    background-repeat: repeat-x;
+    background-position-y: 100%;
 }
 
 .night {
-    background: linear-gradient(45deg, #3A3A58 0%, #6974D8 100%);
+    background: url('./images/night.png'), linear-gradient(45deg, #3A3A58 0%, #6974D8 100%);
     color: #000;
 }
 
@@ -79,8 +84,8 @@ p {
 }
 
 .filingCabinet {
-    width: 95%;
-    height: 95%;
+    width: 50%;
+    height: fit-content;
 }
 
 .content {
@@ -88,12 +93,14 @@ p {
     padding: 1em;
     word-wrap: break-word;
     border: 5px solid #000;
-    border-radius: 0px 20px 20px;
+    border-radius: 20px;
     min-height: 15em;
+    display: none;
 }
 
 .content.selected {
     visibility: visible;
+    display: block;
 }
 
 #aboutContent {
@@ -139,14 +146,20 @@ p {
 
 .projectDemo, .projectDescription {
     margin: 0em 0.75em;
+    max-width: 35%;
 }
 
 @media only screen and (max-width: 600px) {
+    #root {
+        overflow: scroll;
+    }
+
     .desktopTabsContainer {
         display: none;
     }
 
     .folder {
+        margin-top: 2em;
         margin-bottom: 2em;
     }
 
@@ -162,12 +175,31 @@ p {
         margin-top: 2em;
     }
 
+    .content {
+        display: block;
+    }
+
+    #aboutContent #portrait {
+        max-width: 100%;
+    }
+
     .projectDemo {
         width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .filingCabinet {
+        width: 95%;
     }
 }
 
 @media only screen and (min-width: 600px) {
+    #root {
+        align-items: center;
+    }
+
     .content {
         visibility: hidden;
     }
@@ -175,18 +207,17 @@ p {
     .mobileTab {
         display: none;
     }
-
-    .folders {
-        position: relative;
-    }
     
     .folder {
-        position: absolute;
         width: 100%;
     }
 
     #aboutContent #aboutText {
         margin-left: 2em;
+    }
+
+    #aboutContent #portrait {
+        max-width: 50%;
     }
 
     .projectDemo {
